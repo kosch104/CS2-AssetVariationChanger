@@ -26,6 +26,10 @@ namespace AssetVariationChanger.Systems
         private Unity.Mathematics.Random m_Random;
         private int m_RandomSeed;
 
+        private InputAction m_PreviousHotKey;
+        private InputAction m_NextHotKey;
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RandomSeedSystem"/> class.
         /// </summary>
@@ -42,13 +46,13 @@ namespace AssetVariationChanger.Systems
             m_Random = new Unity.Mathematics.Random(1);
 
             // Source of this snipped: Systems.Anarchy.AnarchyUISystem.cs by yenyang
-            var previousHotKey = new InputAction("PreviousAssetVariation", InputActionType.Button, "<Keyboard>/delete");
-            previousHotKey.performed += OnPreviousAssetVariation;
-            previousHotKey.Enable();
+            m_PreviousHotKey = new InputAction("PreviousAssetVariation", InputActionType.Button, $"<Keyboard>/{Mod.m_Setting.PreviousKeyDropdown}");
+            m_PreviousHotKey.performed += OnPreviousAssetVariation;
+            m_PreviousHotKey.Enable();
 
-            var nextHotKey = new InputAction("NextAssetVariation", InputActionType.Button, "<Keyboard>/insert");
-            nextHotKey.performed += OnNextAssetVariation;
-            nextHotKey.Enable();
+            m_NextHotKey = new InputAction("NextAssetVariation", InputActionType.Button, $"<Keyboard>/{Mod.m_Setting.NextKeyDropdown}");
+            m_NextHotKey.performed += OnNextAssetVariation;
+            m_NextHotKey.Enable();
             // End of snippet
 
             //m_RandomSeed = m_Random.NextInt();

@@ -12,7 +12,7 @@ namespace AssetVariationChanger
         public static ILog log = LogManager.GetLogger($"{nameof(AssetVariationChanger)}.{nameof(Mod)}")
             .SetShowsErrorsInUI(false);
 
-        private Setting m_Setting;
+        public static Setting m_Setting;
 
         public void OnLoad(UpdateSystem updateSystem)
         {
