@@ -13,7 +13,7 @@ After placing an asset the variation will stay the same, so it is easier to plac
 
 ## Feature roadmap
 - Visual Asset Selection
-- Other UI~~~~
+- Other UI
 
 ## Acknowledgment
 I would like to thank
