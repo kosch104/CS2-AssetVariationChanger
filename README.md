@@ -17,7 +17,7 @@ After placing an asset the variation will stay the same, so it is easier to plac
 
 ## Acknowledgment
 I would like to thank
-* **Yenyang** for the PoC and initial project functiona~~~~lity.
+* **Yenyang** for the Proof of Concept and initial project functionality.
 
 ## Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities 2 Modding Discord](https://discord.gg/vd7HXnpPJf) or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
