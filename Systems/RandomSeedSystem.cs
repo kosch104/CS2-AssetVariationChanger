@@ -6,6 +6,7 @@ using Colossal.Entities;
 using Colossal.Logging;
 using Game;
 using Game.Common;
+using Game.Input;
 using Game.Tools;
 using Unity.Collections;
 using Unity.Entities;
@@ -39,6 +40,34 @@ namespace AssetVariationChanger.Systems
             m_Log = Mod.log;
             m_Log.Info($"[{nameof(RandomSeedSystem)}] {nameof(OnCreate)}");
             m_Random = new Unity.Mathematics.Random(1);
+
+            // Source of this snipped: Systems.Anarchy.AnarchyUISystem.cs by yenyang
+            var previousHotKey = new InputAction("PreviousAssetVariation", InputActionType.Button, "<Keyboard>/delete");
+            previousHotKey.performed += OnPreviousAssetVariation;
+            previousHotKey.Enable();
+
+            var nextHotKey = new InputAction("NextAssetVariation", InputActionType.Button, "<Keyboard>/insert");
+            nextHotKey.performed += OnNextAssetVariation;
+            nextHotKey.Enable();
+            // End of snippet
+
+            //m_RandomSeed = m_Random.NextInt();
+            m_RandomSeed = 0;
+        }
+
+
+        private void OnPreviousAssetVariation(InputAction.CallbackContext context)
+        {
+            //m_RandomSeed = m_Random.NextInt();
+            m_RandomSeed--;
+            m_Log.Info($"Previous Variation: {m_RandomSeed}");
+        }
+
+        private void OnNextAssetVariation(InputAction.CallbackContext context)
+        {
+            //m_RandomSeed = m_Random.NextInt();
+            m_RandomSeed++;
+            m_Log.Info($"Next Variation: {m_RandomSeed}");
         }
 
 
@@ -62,11 +91,6 @@ namespace AssetVariationChanger.Systems
                     return;
                 }
 
-                if (Keyboard.current.insertKey.isPressed) 
-                {
-                    m_RandomSeed = m_Random.NextInt();
-                    m_Log.Info($"InsertKeyPressed {m_RandomSeed}");
-                }
                 currentCreationDefinition.m_RandomSeed = m_RandomSeed;
                 EntityManager.SetComponentData(entity, currentCreationDefinition);
             }
