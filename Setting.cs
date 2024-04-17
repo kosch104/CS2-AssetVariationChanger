@@ -16,9 +16,9 @@ namespace AssetVariationChanger
         }
 
         [SettingsUIDropdown(typeof(Setting), nameof(GetStringDropdownItems))]
-        public string PreviousKeyDropdown { get; set; } = "delete";
+        public string PreviousKeyDropdown { get; set; } = "leftarrow";
         [SettingsUIDropdown(typeof(Setting), nameof(GetStringDropdownItems))]
-        public string NextKeyDropdown { get; set; } = "insert";
+        public string NextKeyDropdown { get; set; } = "rightarrow";
 
         public DropdownItem<string>[] GetStringDropdownItems()
         {
