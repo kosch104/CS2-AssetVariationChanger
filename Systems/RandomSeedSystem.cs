@@ -25,6 +25,7 @@ namespace AssetVariationChanger.Systems
         private ILog m_Log;
         private Unity.Mathematics.Random m_Random;
         private int m_RandomSeed;
+        private ToolSystem m_ToolSystem;
 
         private InputAction m_PreviousHotKey;
         private InputAction m_NextHotKey;
@@ -44,6 +45,7 @@ namespace AssetVariationChanger.Systems
             m_Log = Mod.log;
             m_Log.Info($"[{nameof(RandomSeedSystem)}] {nameof(OnCreate)}");
             m_Random = new Unity.Mathematics.Random(1);
+            m_ToolSystem = World.DefaultGameObjectInjectionWorld?.GetOrCreateSystemManaged<ToolSystem>();
 
             // Source of this snipped: Systems.Anarchy.AnarchyUISystem.cs by yenyang
             m_PreviousHotKey = new InputAction("PreviousAssetVariation", InputActionType.Button, $"<Keyboard>/{Mod.m_Setting.PreviousKeyDropdown}");
@@ -75,9 +77,14 @@ namespace AssetVariationChanger.Systems
         }
 
 
+
         /// <inheritdoc/>
         protected override void OnUpdate()
         {
+            if (m_ToolSystem.activeTool.toolID == "Line Tool")
+            {
+                return;
+            }
             m_ObjectDefinitionQuery = SystemAPI.QueryBuilder()
                 .WithAllRW<CreationDefinition>()
                 .WithAll<Updated>()
