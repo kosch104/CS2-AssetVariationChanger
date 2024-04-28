@@ -47,7 +47,7 @@ namespace AssetVariationChanger.Systems
             m_Random = new Unity.Mathematics.Random(1);
             m_ToolSystem = World.DefaultGameObjectInjectionWorld?.GetOrCreateSystemManaged<ToolSystem>();
 
-            // Source of this snipped: Systems.Anarchy.AnarchyUISystem.cs by yenyang
+            // Source of this snippet: Systems.Anarchy.AnarchyUISystem.cs by yenyang
             m_PreviousHotKey = new InputAction("PreviousAssetVariation", InputActionType.Button, $"<Keyboard>/{Mod.m_Setting.PreviousKeyDropdown}");
             m_PreviousHotKey.performed += OnPreviousAssetVariation;
             m_PreviousHotKey.Enable();
@@ -81,6 +81,10 @@ namespace AssetVariationChanger.Systems
         /// <inheritdoc/>
         protected override void OnUpdate()
         {
+            if (!Mod.m_Setting.EnableVariationChooser)
+            {
+                return;
+            }
             if (m_ToolSystem.activeTool.toolID == "Line Tool")
             {
                 return;

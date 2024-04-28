@@ -1,5 +1,5 @@
 # Asset Variation Changer
-This mod allows you to control behavior of asset variations
+This mod allows you to control behavior of asset variations using hotkeys
 
 ## Features
 
@@ -10,15 +10,19 @@ Please note that not all assets have variations, and you have to move the asset 
 ### Asset Variations stays after placing
 After placing an asset the variation will stay the same, so it is easier to place multiple assets of the same variation in a row.
 
+### Works in the Asset Editor!
+
 
 ## Disclaimer
-This mod is currently in an experimental state and there are known issue with Line Tool. When using the Lin~~~~e Tool the assets variations will all be the same, even when the randomize option is selected. This is a known issue and will be fixed in a future update.
-
+This mod is currently in an experimental state and there might be bugs. Please report any issues you encounter.
 
 ## Feature roadmap
 - Compatibility with Line Tool
 - Visual Asset Selection
 - Other UI
+
+## Known Issues
+- Surfaces on some assets are still random
 
 ## Acknowledgment
 I would like to thank

@@ -5,6 +5,7 @@ using Game.Settings;
 using Game.UI;
 using Game.UI.Widgets;
 using System.Collections.Generic;
+using Game.UI.Localization;
 
 namespace AssetVariationChanger
 {
@@ -15,10 +16,14 @@ namespace AssetVariationChanger
         {
         }
 
+        public bool DummyOption;
+
         [SettingsUIDropdown(typeof(Setting), nameof(GetStringDropdownItems))]
         public string PreviousKeyDropdown { get; set; } = "leftarrow";
         [SettingsUIDropdown(typeof(Setting), nameof(GetStringDropdownItems))]
         public string NextKeyDropdown { get; set; } = "rightarrow";
+
+        public bool EnableVariationChooser { get; set; }
 
         public DropdownItem<string>[] GetStringDropdownItems()
         {
@@ -41,13 +46,15 @@ namespace AssetVariationChanger
             return new DropdownItem<string>()
             {
                 value = value,
-                displayName = displayName
+                displayName = LocalizedString.IdWithFallback($"Konsi.AssetVariationChanger.Keybind.{displayName}", displayName)
             };
         }
 
         public override void SetDefaults()
         {
-            throw new System.NotImplementedException();
+            PreviousKeyDropdown = "leftarrow";
+            NextKeyDropdown = "rightarrow";
+            EnableVariationChooser = true;
         }
     }
 
@@ -77,6 +84,12 @@ namespace AssetVariationChanger
                 {
                     m_Setting.GetOptionDescLocaleID(nameof(Setting.NextKeyDropdown)),
                     "This key will be bound to select the next asset variation (Restart required)"
+                },
+
+                { m_Setting.GetOptionLabelLocaleID(nameof(Setting.EnableVariationChooser)), "Enable Variation Chooser" },
+                {
+                    m_Setting.GetOptionDescLocaleID(nameof(Setting.EnableVariationChooser)),
+                    "If enabled, the mod actually works. If disabled, the mod does nothing. This is useful if you want the vanilla random behavior"
                 },
             };
         }
