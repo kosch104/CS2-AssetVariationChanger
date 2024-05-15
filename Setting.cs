@@ -23,7 +23,7 @@ namespace AssetVariationChanger
         [SettingsUIDropdown(typeof(Setting), nameof(GetStringDropdownItems))]
         public string NextKeyDropdown { get; set; } = "rightarrow";
 
-        public bool EnableVariationChooser { get; set; }
+        public bool EnableVariationChooser { get; set; } = true;
 
         public DropdownItem<string>[] GetStringDropdownItems()
         {
