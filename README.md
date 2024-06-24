@@ -7,7 +7,7 @@ This mod allows you to control behavior of asset variations using hotkeys
 Use the **arrow keys** (changeable) to cycle through the available variations of the selected asset. There is currently no UI for this feature, but it is planned for a future update.
 Please note that not all assets have variations, and you have to move the asset to see the changes.
 
-### Asset Variations stays after placing
+### Asset Variations stay~~~~ after placing
 After placing an asset the variation will stay the same, so it is easier to place multiple assets of the same variation in a row.
 
 ### Works in the Asset Editor!

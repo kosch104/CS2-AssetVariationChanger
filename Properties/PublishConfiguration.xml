@@ -17,7 +17,7 @@ This mod allows you to control behavior of asset variations using hotkeys
 Use the **arrow keys** (changeable) to cycle through the available variations of the selected asset. There is currently no UI for this feature, but it is planned for a future update.
 Please note that not all assets have variations, and you have to move the asset to see the changes.
 
-### Asset Variations stays after placing
+### Asset Variations stay after placing
 After placing an asset the variation will stay the same, so it is easier to place multiple assets of the same variation in a row.
 
 ### Works in the Asset Editor!
@@ -42,13 +42,13 @@ I would like to thank
 	<Thumbnail Value="Properties/Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
 	<Screenshot Value="Properties/Thumbnail.png" />
-	<Screenshot Value="Properties/image1.png" />
+	<Screenshot Value="Properties/image1.jpg" />
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/asset-variation-changer.1666265/" />
 	<!--Version of the mod-->
-	<ModVersion Value="0.1.3" />
+	<ModVersion Value="0.2.0" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -56,7 +56,9 @@ I would like to thank
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<ChangeLog Value="" />
 	<ChangeLog>
-- Set default setting to enabled
+- Add Support for Economy 2.0 Update
+- Update Keybinds to use new Proxy Bindings
+- Add Keybind to Enable/Disable Mod (default: Shift + V)
 	</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 	<ExternalLink Type="github" Url="https://github.com/kosch104/CS2-AssetVariationChanger" />

@@ -21,14 +21,12 @@ namespace AssetVariationChanger.Systems
     /// </summary>
     public partial class RandomSeedSystem : GameSystemBase
     {
+        public static RandomSeedSystem Instance;
         private EntityQuery m_ObjectDefinitionQuery;
         private ILog m_Log;
         private Unity.Mathematics.Random m_Random;
         private int m_RandomSeed;
         private ToolSystem m_ToolSystem;
-
-        private InputAction m_PreviousHotKey;
-        private InputAction m_NextHotKey;
 
 
         /// <summary>
@@ -36,6 +34,7 @@ namespace AssetVariationChanger.Systems
         /// </summary>
         public RandomSeedSystem()
         {
+            Instance = this;
         }
 
         /// <inheritdoc/>
@@ -47,35 +46,28 @@ namespace AssetVariationChanger.Systems
             m_Random = new Unity.Mathematics.Random(1);
             m_ToolSystem = World.DefaultGameObjectInjectionWorld?.GetOrCreateSystemManaged<ToolSystem>();
 
-            // Source of this snippet: Systems.Anarchy.AnarchyUISystem.cs by yenyang
-            m_PreviousHotKey = new InputAction("PreviousAssetVariation", InputActionType.Button, $"<Keyboard>/{Mod.m_Setting.PreviousKeyDropdown}");
-            m_PreviousHotKey.performed += OnPreviousAssetVariation;
-            m_PreviousHotKey.Enable();
-
-            m_NextHotKey = new InputAction("NextAssetVariation", InputActionType.Button, $"<Keyboard>/{Mod.m_Setting.NextKeyDropdown}");
-            m_NextHotKey.performed += OnNextAssetVariation;
-            m_NextHotKey.Enable();
-            // End of snippet
-
             //m_RandomSeed = m_Random.NextInt();
             m_RandomSeed = 0;
         }
 
 
-        private void OnPreviousAssetVariation(InputAction.CallbackContext context)
+        public void OnPreviousAssetVariation(InputActionPhase phase)
         {
-            //m_RandomSeed = m_Random.NextInt();
-            m_RandomSeed--;
-            m_Log.Info($"Previous Variation: {m_RandomSeed}");
+            if (phase == InputActionPhase.Performed)
+            {
+                m_RandomSeed--;
+                m_Log.Info($"Previous Variation: {m_RandomSeed}");
+            }
         }
 
-        private void OnNextAssetVariation(InputAction.CallbackContext context)
+        public void OnNextAssetVariation(InputActionPhase phase)
         {
-            //m_RandomSeed = m_Random.NextInt();
-            m_RandomSeed++;
-            m_Log.Info($"Next Variation: {m_RandomSeed}");
+            if (phase == InputActionPhase.Performed)
+            {
+                m_RandomSeed++;
+                m_Log.Info($"Next Variation: {m_RandomSeed}");
+            }
         }
-
 
 
         /// <inheritdoc/>
@@ -112,6 +104,5 @@ namespace AssetVariationChanger.Systems
 
             entities.Dispose();
         }
-
     }
 }
