@@ -11,20 +11,20 @@ using UnityEngine.InputSystem;
 
 namespace AssetVariationChanger
 {
-    [FileLocation(nameof(AssetVariationChanger))]
+    [FileLocation($"ModsSettings/{nameof(AssetVariationChanger)}/{nameof(AssetVariationChanger)}")]
     public class Setting : ModSetting
     {
         public Setting(IMod mod) : base(mod)
         {
         }
 
-        [SettingsUIKeyboardBinding(Key.LeftArrow, Mod.kPreviousVariationBindingName)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.LeftArrow, Mod.kPreviousVariationBindingName)]
         public ProxyBinding PreviousVariationBinding { get; set; }
 
-        [SettingsUIKeyboardBinding(Key.RightArrow, Mod.kNextVariationBindingName)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.RightArrow, Mod.kNextVariationBindingName)]
         public ProxyBinding NextVariationBinding { get; set; }
 
-        [SettingsUIKeyboardBinding(Key.V, Mod.kToggleVariationChooserBindingName, shift:true)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.V, Mod.kToggleVariationChooserBindingName, shift:true)]
         public ProxyBinding ToggleVariationChooser { get; set; }
 
         public bool EnableVariationChooser { get; set; } = true;

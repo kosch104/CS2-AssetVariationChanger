@@ -23,6 +23,7 @@ namespace AssetVariationChanger.Systems
     {
         public static RandomSeedSystem Instance;
         private EntityQuery m_ObjectDefinitionQuery;
+        private ObjectToolSystem m_ObjectToolSystem;
         private ILog m_Log;
         private Unity.Mathematics.Random m_Random;
         private int m_RandomSeed;
@@ -42,12 +43,26 @@ namespace AssetVariationChanger.Systems
         {
             base.OnCreate();
             m_Log = Mod.log;
-            m_Log.Info($"[{nameof(RandomSeedSystem)}] {nameof(OnCreate)}");
+            //m_Log.Info($"[{nameof(RandomSeedSystem)}] {nameof(OnCreate)}");
             m_Random = new Unity.Mathematics.Random(1);
-            m_ToolSystem = World.DefaultGameObjectInjectionWorld?.GetOrCreateSystemManaged<ToolSystem>();
+            m_ToolSystem = World.GetOrCreateSystemManaged<ToolSystem>();
+            m_ObjectToolSystem = World.GetOrCreateSystemManaged<ObjectToolSystem>();
 
             //m_RandomSeed = m_Random.NextInt();
             m_RandomSeed = 0;
+        }
+
+        private void ForceUpdate()
+        {
+            var field = typeof(ObjectToolSystem).GetField("m_ForceUpdate", BindingFlags.NonPublic | BindingFlags.Instance);
+            if (field != null)
+            {
+                field.SetValue(m_ObjectToolSystem, true);
+            }
+            else
+            {
+                m_Log.Error($"Field m_ForceUpdate not found in ObjectToolSystem.");
+            }
         }
 
 
@@ -56,6 +71,7 @@ namespace AssetVariationChanger.Systems
             if (phase == InputActionPhase.Performed)
             {
                 m_RandomSeed--;
+                ForceUpdate();
                 m_Log.Info($"Previous Variation: {m_RandomSeed}");
             }
         }
@@ -65,6 +81,7 @@ namespace AssetVariationChanger.Systems
             if (phase == InputActionPhase.Performed)
             {
                 m_RandomSeed++;
+                ForceUpdate();
                 m_Log.Info($"Next Variation: {m_RandomSeed}");
             }
         }
