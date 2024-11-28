@@ -43,17 +43,17 @@ namespace AssetVariationChanger
             m_ToggleVariationChooserAction.shouldBeEnabled = true;
 
             m_PreviousVariationAction.onInteraction += (_, phase) =>
-                RandomSeedSystem.Instance.OnPreviousAssetVariation(phase);
+                VariationChangerSystem.Instance.OnPreviousAssetVariation(phase);
 
             m_NextVariationAction.onInteraction += (_, phase) =>
-                RandomSeedSystem.Instance.OnNextAssetVariation(phase);
+                VariationChangerSystem.Instance.OnNextAssetVariation(phase);
 
             m_ToggleVariationChooserAction.onInteraction += (_, _) =>
                 m_Setting.EnableVariationChooser = !m_Setting.EnableVariationChooser;
 
             AssetDatabase.global.LoadSettings(nameof(AssetVariationChanger), m_Setting, new Setting(this));
 
-            updateSystem.UpdateBefore<RandomSeedSystem>(SystemUpdatePhase.Modification1);
+            updateSystem.UpdateBefore<VariationChangerSystem>(SystemUpdatePhase.Modification1);
         }
 
         public void OnDispose()
