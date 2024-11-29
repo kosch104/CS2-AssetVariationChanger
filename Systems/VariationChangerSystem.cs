@@ -75,14 +75,13 @@ namespace AssetVariationChanger.Systems
             m_ToolSystem = World.GetOrCreateSystemManaged<ToolSystem>();
             m_ObjectToolSystem = World.GetOrCreateSystemManaged<ObjectToolSystem>();
 
+            //m_RandomSeed = m_Random.NextInt();
+            m_RandomSeed = 0;
             m_ObjectDefinitionQuery = SystemAPI.QueryBuilder()
                 .WithAllRW<CreationDefinition>()
                 .WithAll<Updated>()
                 .WithNone<Deleted, Overridden>()
                 .Build();
-
-            //m_RandomSeed = m_Random.NextInt();
-            m_RandomSeed = 0;
             RequireForUpdate(m_ObjectDefinitionQuery);
         }
 
@@ -132,7 +131,6 @@ namespace AssetVariationChanger.Systems
             {
                 return;
             }
-
             NativeArray<Entity> entities = m_ObjectDefinitionQuery.ToEntityArray(Allocator.Temp);
 
             foreach (Entity entity in entities)
