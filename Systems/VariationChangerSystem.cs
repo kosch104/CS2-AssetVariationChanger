@@ -140,24 +140,13 @@ namespace AssetVariationChanger.Systems
                     entities.Dispose();
                     return;
                 }
-
                 // If found tree controller type and the prefab entity has vegetation component then skip this entity.
                 if (Mod.m_Setting.TreeControllerCompatibility && m_FoundTreeController && EntityManager.HasComponent(currentCreationDefinition.m_Prefab, m_VegetationComponentType))
                 {
                     continue;
                 }
-
-                if (!EntityManager.TryGetComponent(entity, out ObjectDefinition currentObjectDefinition))
-                {
-                    entities.Dispose();
-                    return;
-                }
-
                 currentCreationDefinition.m_RandomSeed = m_RandomSeed;
                 EntityManager.SetComponentData(entity, currentCreationDefinition);
-
-                /*currentObjectDefinition.m_Rotation = Quaternion.Euler(0, m_Random.NextFloat(0, 360), 0);
-                EntityManager.SetComponentData(entity, currentObjectDefinition);*/
             }
 
             entities.Dispose();
